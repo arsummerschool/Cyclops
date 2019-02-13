@@ -7,6 +7,7 @@ public class EyeTracking : MonoBehaviour
 {
     #region Public Variables
     public GameObject Camera;
+    public GameObject Laser;
     public Material FocusedMaterial, NonFocusedMaterial;
     #endregion
 

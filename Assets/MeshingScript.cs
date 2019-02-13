@@ -54,9 +54,9 @@ public class MeshingScript : MonoBehaviour
             {
                 if (Mapper.enabled)
                 {
-                    if (material != GroundMaterial)
+                    if (material != BlackMaterial)
                     {
-                        meshRenderer.material = GroundMaterial;
+                        meshRenderer.material = BlackMaterial;
                     }
                 }
                 else if (material != InactiveMaterial)
@@ -64,9 +64,9 @@ public class MeshingScript : MonoBehaviour
                     meshRenderer.material = InactiveMaterial;
                 }
             }
-            else if (material != BlackMaterial)
+            else if (material != GroundMaterial)
             {
-                meshRenderer.material = BlackMaterial;
+                meshRenderer.material = GroundMaterial;
             }
         }
     }
