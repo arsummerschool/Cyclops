@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MagicLeap.GestureManager;
+#using MagicLeapInternal.GestureManager;
 
 public class GameManager : MonoBehaviour {
 	
@@ -8,6 +10,8 @@ public class GameManager : MonoBehaviour {
 
 	public TextMesh scoreUI;
 	public TextMesh powerUI;
+
+	public GestureManager GestureManager;
 	
 	//Number of targets that can be on screen at one time
 	public int targetAmount = 1;
