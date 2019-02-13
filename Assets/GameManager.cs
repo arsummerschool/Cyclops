@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MagicLeap.GestureManager;
-#using MagicLeapInternal.GestureManager;
+using MagicLeap;
 
 public class GameManager : MonoBehaviour {
 	
@@ -10,8 +9,6 @@ public class GameManager : MonoBehaviour {
 
 	public TextMesh scoreUI;
 	public TextMesh powerUI;
-
-	public GestureManager GestureManager;
 	
 	//Number of targets that can be on screen at one time
 	public int targetAmount = 1;
@@ -30,6 +27,8 @@ public class GameManager : MonoBehaviour {
 		_timeLeft = spawnRate;
 
 		_score = 0;
+
+		
 	}
 	
 	// Update is called once per frame
