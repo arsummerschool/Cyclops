@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MagicLeap;
+using UnityEngine.XR.MagicLeap;
 
 public class GameManager : MonoBehaviour {
 	
@@ -39,6 +40,14 @@ public class GameManager : MonoBehaviour {
 			Spawn();
 			_timeLeft = spawnRate;
 		 }
+
+		 if (MLHands.IsStarted)
+            {
+				if(MLHands.Right.KeyPose == MLHandKeyPose.Fist){
+					FireLaser();
+				}
+				
+			}
 	}
 
 	void FireLaser(){
