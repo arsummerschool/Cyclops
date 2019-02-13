@@ -318,6 +318,27 @@ Prefab:
       propertyPath: _statusLabel
       value: 
       objectReference: {fileID: 1211906636}
+    - target: {fileID: 23502456708844000, guid: 782205fb63dfcbd4497f29ef1eddc48c,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23555104216434712, guid: 782205fb63dfcbd4497f29ef1eddc48c,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23114223283215706, guid: 782205fb63dfcbd4497f29ef1eddc48c,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114619444984779822, guid: 782205fb63dfcbd4497f29ef1eddc48c,
+        type: 2}
+      propertyPath: burnDecalPrefab
+      value: 
+      objectReference: {fileID: 1103323303339754, guid: 8988c11ffe2fb3a458f8b20c8f6e5b15,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 782205fb63dfcbd4497f29ef1eddc48c, type: 2}
   m_IsPrefabParent: 0
@@ -824,6 +845,7 @@ MonoBehaviour:
   _raycast: {fileID: 0}
   _defaultDistance: 9
   _scaleWhenClose: 1
+  burnDecalPrefab: {fileID: 0}
 --- !u!114 &1508919101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1383,6 +1405,7 @@ MonoBehaviour:
   _raycast: {fileID: 1758143969}
   _defaultDistance: 9
   _scaleWhenClose: 1
+  burnDecalPrefab: {fileID: 0}
 --- !u!135 &1758143971
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1449,4 +1472,49 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1815750360
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1815750362}
+  - component: {fileID: 1815750361}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1815750361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1815750360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f2f77f2db844aa43ac42e82dd82fb62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPrefab: {fileID: 100008, guid: 046509866b64c4e68b9a6fefa43ab4cf, type: 3}
+  scoreUI: {fileID: 0}
+  powerUI: {fileID: 0}
+  targetAmount: 1
+  spawnRate: 10
+--- !u!4 &1815750362
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1815750360}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.050000004, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
