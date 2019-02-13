@@ -6,8 +6,8 @@ public class GameManager : MonoBehaviour {
 	
 	public GameObject targetPrefab;
 
-	public GameObject scoreUI;
-	public GameObject powerUI;
+	public TextMesh scoreUI;
+	public TextMesh powerUI;
 	
 	//Number of targets that can be on screen at one time
 	public int targetAmount = 1;
@@ -17,13 +17,15 @@ public class GameManager : MonoBehaviour {
 	//Private
 	private ArrayList[] _targets;
 	private float _timeLeft;
-	public int _score;
+	private int _score;
 
 	// Use this for initialization
 	void Start () {
 		 _targets = new ArrayList[targetAmount];
 
 		_timeLeft = spawnRate;
+
+		_score = 0;
 	}
 	
 	// Update is called once per frame
@@ -48,13 +50,16 @@ public class GameManager : MonoBehaviour {
 			 GameObject hitObject = hit.transform.gameObject;
 			 if(hitObject.tag == "Target"){
 				 Destroy(hitObject);
+				 
+				 //Update score/UI
 				 _score++;
+				 scoreUI.text = "Score: " + _score;
 			 }
         }
 	}
 
 	void Spawn(){
-		//Needs some code for working out the position
+		//Works out a random spot near the player's start pos for now
 		
 		float locX = Random.Range(0.5f, 6);
 		float locY = Random.Range(0.5f, 6);
