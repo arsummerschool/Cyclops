@@ -17,6 +17,8 @@ public class BurnDecal : MonoBehaviour {
         var mat = gameObject.GetComponent<MeshRenderer>().material;
         Color newColor = mat.color;
         newColor.a -= Time.deltaTime;
+        //var newScale = transform.localScale - new Vector3();
+        //transform.localScale = transform
         mat.color = newColor;
         gameObject.GetComponent<MeshRenderer>().material = mat;
         if (timeLimit < 0)

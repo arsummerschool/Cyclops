@@ -5,7 +5,7 @@ using UnityEngine;
 public class HealthManager : MonoBehaviour {
 
     public int health = 100;
-	public float timeLimit = 10f;
+	public float timeLimit = 1000f;
 
 	void Update(){
 		timeLimit -= Time.deltaTime;

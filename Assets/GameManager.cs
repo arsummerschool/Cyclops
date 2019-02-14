@@ -4,88 +4,96 @@ using UnityEngine;
 using MagicLeap;
 using UnityEngine.XR.MagicLeap;
 
-public class GameManager : MonoBehaviour
+namespace MagicLeap
 {
-
-    public GameObject targetPrefab;
-    public GameObject mainMLCamera;
-    public GameObject laser;
-
-    public TextMesh scoreUI;
-    public TextMesh powerUI;
-
-    //Number of targets that can be on screen at one time
-    public int targetAmount = 1;
-
-    public float spawnRate = 10f;
-
-    //Private
-    private ArrayList[] _targets;
-    private float _timeLeft;
-    private int _score;
-
-    // Use this for initialization
-    void Start()
+    public class GameManager : MonoBehaviour
     {
-        _targets = new ArrayList[targetAmount];
 
-        _timeLeft = spawnRate;
+        public GameObject targetPrefab;
+        public GameObject mainMLCamera;
+        public GameObject laser;
 
-        _score = 0;
+        public TextMesh scoreUI;
+        public TextMesh powerUI;
 
+        //Number of targets that can be on screen at one time
+        public int targetAmount = 1;
 
-    }
+        public float spawnRate = 10f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        //Basic spawn
-        _timeLeft -= Time.deltaTime;
-        if (_timeLeft < 0 && _targets.Length <= targetAmount)
+        //Private
+        private ArrayList _targets;
+        private float _timeLeft;
+        private int _score;
+
+        // Use this for initialization
+        void Start()
         {
-            Spawn();
+            _targets = new ArrayList(targetAmount);
+
             _timeLeft = spawnRate;
+
+            _score = 0;
+
+
         }
 
-        //if (MLHands.IsStarted)
-        //{
-        //    if (MLHands.Right.KeyPose == MLHandKeyPose.Fist)
-        //    {
-        //        FireLaser();
-        //        //laser.GetComponent<laserController>().IsFiring = true;
-        //    }
-
-        //}
-    }
-
-    public void OnLaserHit(GameObject target)
-    {
-        if (target.tag == "Target")
+        // Update is called once per frame
+        void Update()
         {
-            Destroy(target);
+            //Basic spawn
+            _timeLeft -= Time.deltaTime;
+            if (_timeLeft < 0 && _targets.Count <= targetAmount)
+            {
+                Spawn();
+                _timeLeft = spawnRate;
+            }
 
-            //Update score/UI
-            _score++;
-            scoreUI.text = "Score: " + _score;
+            //if (MLHands.IsStarted)
+            //{
+            //    if (MLHands.Right.KeyPose == MLHandKeyPose.Fist)
+            //    {
+            //        FireLaser();
+            //        //laser.GetComponent<laserController>().IsFiring = true;
+            //    }
+
+            //}
         }
-    }
 
-    void Spawn()
-    {
-        //Works out a random spot near the player's start pos for now
+        public void OnRaycastHit(MLWorldRays.MLWorldRaycastResultState state, RaycastHit result)
+        {
 
-        float locX = Random.Range(0.1f, 1.5f);
-        float locY = Random.Range(2.0f, 2.5f);
-        float locZ = Random.Range(1.1f, 3.5f);
-        locX = locX + mainMLCamera.transform.position.x;
-        locY = locY + mainMLCamera.transform.position.y;
-        locZ = locZ + mainMLCamera.transform.position.z;
+            //Code for damage
+            if (state != MLWorldRays.MLWorldRaycastResultState.RequestFailed && state != MLWorldRays.MLWorldRaycastResultState.NoCollision)
+            {
+                GameObject hitObject = result.transform.gameObject;
+                if (hitObject.tag == "Target")
+                {
+                    Destroy(hitObject);
 
-        Vector3 spawnPos = new Vector3(locX, locY, locZ);
+                    //Update score/UI
+                    _score++;
+                    scoreUI.text = "Score: " + _score;
+                }
+            }
+        }
+        void Spawn()
+        {
+            //Works out a random spot near the player's start pos for now
+            float locX = Random.Range(1.1f, 1.5f);
+            float locY = Random.Range(2.0f, 2.5f);
+            float locZ = Random.Range(1.1f, 3.5f);
+            //locX = locX + mainMLCamera.transform.position.x;
+            //locY = locY + mainMLCamera.transform.position.y;
+            //locZ = locZ + mainMLCamera.transform.position.z;
 
-        GameObject newTarget = Instantiate(targetPrefab);
-        newTarget.transform.position = spawnPos;
-        var lookAtLocation = mainMLCamera.transform.position;
-        newTarget.transform.LookAt(lookAtLocation);
+            Vector3 spawnPos = new Vector3(locX, locY, locZ);
+
+            GameObject newTarget = Instantiate(targetPrefab);
+            newTarget.transform.position = spawnPos;
+            var lookAtLocation = mainMLCamera.transform.position;
+            newTarget.transform.LookAt(lookAtLocation);
+            _targets.Add(newTarget);
+        }
     }
 }
