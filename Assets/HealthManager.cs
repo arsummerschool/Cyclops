@@ -11,7 +11,7 @@ public class HealthManager : MonoBehaviour {
 		timeLimit -= Time.deltaTime;
 
 		if(timeLimit < 0)
-			Destroy(this);
+			Destroy(gameObject);
 	}
 	public int GetHealth(){
 		return health;

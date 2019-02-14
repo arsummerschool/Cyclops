@@ -4,82 +4,88 @@ using UnityEngine;
 using MagicLeap;
 using UnityEngine.XR.MagicLeap;
 
-public class GameManager : MonoBehaviour {
-	
-	public GameObject targetPrefab;
+public class GameManager : MonoBehaviour
+{
 
-	public TextMesh scoreUI;
-	public TextMesh powerUI;
-	
-	//Number of targets that can be on screen at one time
-	public int targetAmount = 1;
+    public GameObject targetPrefab;
+    public GameObject mainMLCamera;
+    public GameObject laser;
 
-	public float spawnRate = 10f;
+    public TextMesh scoreUI;
+    public TextMesh powerUI;
 
-	//Private
-	private ArrayList[] _targets;
-	private float _timeLeft;
-	private int _score;
+    //Number of targets that can be on screen at one time
+    public int targetAmount = 1;
 
-	// Use this for initialization
-	void Start () {
-		 _targets = new ArrayList[targetAmount];
+    public float spawnRate = 10f;
 
-		_timeLeft = spawnRate;
+    //Private
+    private ArrayList[] _targets;
+    private float _timeLeft;
+    private int _score;
 
-		_score = 0;
+    // Use this for initialization
+    void Start()
+    {
+        _targets = new ArrayList[targetAmount];
 
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		//Basic spawn
-		_timeLeft -= Time.deltaTime;
-     	if (_timeLeft < 0 && _targets.Length <= targetAmount){
-			Spawn();
-			_timeLeft = spawnRate;
-		 }
+        _timeLeft = spawnRate;
 
-		 if (MLHands.IsStarted)
-            {
-				if(MLHands.Right.KeyPose == MLHandKeyPose.Fist){
-					FireLaser();
-				}
-				
-			}
-	}
+        _score = 0;
 
-	void FireLaser(){
-		
-		RaycastHit hit;
-        // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //Basic spawn
+        _timeLeft -= Time.deltaTime;
+        if (_timeLeft < 0 && _targets.Length <= targetAmount)
         {
-             //Need code for setting the start end of PF
-			
-			 //Code for damage
-			 GameObject hitObject = hit.transform.gameObject;
-			 if(hitObject.tag == "Target"){
-				 Destroy(hitObject);
-				 
-				 //Update score/UI
-				 _score++;
-				 scoreUI.text = "Score: " + _score;
-			 }
+            Spawn();
+            _timeLeft = spawnRate;
         }
-	}
 
-	void Spawn(){
-		//Works out a random spot near the player's start pos for now
-		
-		float locX = Random.Range(0.2f, 1.5f);
-		float locY = Random.Range(0.2f, 1.5f);
+        //if (MLHands.IsStarted)
+        //{
+        //    if (MLHands.Right.KeyPose == MLHandKeyPose.Fist)
+        //    {
+        //        FireLaser();
+        //        //laser.GetComponent<laserController>().IsFiring = true;
+        //    }
 
-		Vector3 spawnPos = new Vector3(locX, locY, 1.0f);
+        //}
+    }
 
-		GameObject newTarget = Instantiate(targetPrefab);
-		
-		newTarget.transform.position = spawnPos;
-	}	
+    public void OnLaserHit(GameObject target)
+    {
+        if (target.tag == "Target")
+        {
+            Destroy(target);
+
+            //Update score/UI
+            _score++;
+            scoreUI.text = "Score: " + _score;
+        }
+    }
+
+    void Spawn()
+    {
+        //Works out a random spot near the player's start pos for now
+
+        float locX = Random.Range(0.1f, 1.5f);
+        float locY = Random.Range(2.0f, 2.5f);
+        float locZ = Random.Range(1.1f, 3.5f);
+        locX = locX + mainMLCamera.transform.position.x;
+        locY = locY + mainMLCamera.transform.position.y;
+        locZ = locZ + mainMLCamera.transform.position.z;
+
+        Vector3 spawnPos = new Vector3(locX, locY, locZ);
+
+        GameObject newTarget = Instantiate(targetPrefab);
+        newTarget.transform.position = spawnPos;
+        var lookAtLocation = mainMLCamera.transform.position;
+        newTarget.transform.LookAt(lookAtLocation);
+    }
 }
