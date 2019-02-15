@@ -51,12 +51,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2f77f2db844aa43ac42e82dd82fb62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPrefab: {fileID: 1428697012061350, guid: 5ddac61d63854554bbfb7db802bff0a2,
-    type: 2}
+  targetPrefab:
+  - {fileID: 1354949404985240, guid: 297fb1c6ed0113d4eaae300ae5a6a57b, type: 2}
+  - {fileID: 1231184579596614, guid: 1a494d25d1796f8489adb98a223637d7, type: 2}
+  - {fileID: 1836342847569418, guid: 21fbce6eee5f4fd4a9e3e0488d46ffaa, type: 2}
   mainMLCamera: {fileID: 0}
   laserParticles: {fileID: 0}
   laserBeam: {fileID: 0}
   scoreUI: {fileID: 0}
   powerUI: {fileID: 0}
+  glintController: {fileID: 0}
   targetAmount: 5
   spawnRate: 4
+  Targets: []

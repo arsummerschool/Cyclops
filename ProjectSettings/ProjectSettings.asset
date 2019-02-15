@@ -156,6 +156,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
+    Lumin: com.arsummerschool.cyclops
     Standalone: com.Company.ProductName
   buildNumber: {}
   AndroidBundleVersionCode: 1
@@ -671,6 +672,7 @@ PlayerSettings:
   luminPrivilege:
   - CameraCapture
   - WorldReconstruction
+  - ControllerPose
   luminMinimumPlatformAPILevel: 3
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
